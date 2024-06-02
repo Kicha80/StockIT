@@ -1,0 +1,254 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+ 
+.container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+ 
+.left-section {
+    padding: 20px;
+    width: 70%;
+}
+ 
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+ 
+form {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+ 
+input[type="text"], input[type="submit"], input[type="date"], select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+ 
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+ 
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+ 
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+ 
+th {
+    background-color: #4CAF50;
+    color: white;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+ 
+#stock-data th:first-child,
+#stock-data td:first-child {
+    border-left: none;
+}
+ 
+#stock-data th:last-child,
+#stock-data td:last-child {
+    border-right: none;
+}
+ 
+#stock-data tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+ 
+#chart-container {
+    margin-top: 20px;
+    text-align: center;
+}
+ 
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+ 
+#loading-message {
+    display: none;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+}
+ 
+#pagination-controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 20px 0; /* Adjust margin to place below table */
+}
+ 
+#pagination-controls button {
+    padding: 10px;
+    font-size: 16px;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+ 
+#pagination-controls button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+ 
+#stock-data {
+    width: 100%; /* Ensure table takes full width of left section */
+}
+ 
+#news-section {
+    padding: 20px;
+    width: 30%;
+    margin-left: 60px; /* Add margin to separate from table */
+}
+ 
+#pagination-controls span {
+    font-size: 16px;
+}
+ 
+ 
+ 
+/* Add these styles for the chatbot interface */
+#chat-container {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+ 
+#chat-messages {
+    max-height: 300px;
+    overflow-y: auto;
+}
+ 
+#chat-form {
+    display: flex;
+    margin-top: 20px;
+}
+ 
+#chat-input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+ 
+#chat-form button {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+/* Update styles for the News Feed section */
+.right-section {
+    width: 30%;
+    padding: 15px; /* Reduced padding */
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    margin-top: -20px; /* Push the section up */
+}
+ 
+.right-section h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 10px;
+}
+ 
+#news-feed {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+ 
+#news-feed li {
+    margin-bottom: 0; /* Remove margin */
+}
+ 
+#news-feed li a {
+    display: block;
+    padding: 10px;
+    text-decoration: underline; /* Underline the links */
+    font-size: 16px; /* Increased font size */
+    font-style: italic; /* Italic font style */
+}
+ 
+#news-feed li:nth-child(odd) a {
+    color: #3366cc; /* Blue color for odd links */
+}
+ 
+#news-feed li:nth-child(even) a {
+    color: #964B00; /* Brown color for even links */
+}
+ 
+#news-feed li:nth-child(3n) a {
+    color: #FF0000; /* Red color for every third link */
+}
+.banner {
+    background-color: rgb(130, 230, 200); /* Very light purple */
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+ 
+#news-feed li a:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+}
+ 
+/* Additional styling for News Feed section */
+ 
+#top-performers-dropdown {
+    margin-bottom: 20px;
+    font-size: 14px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+ 
+#industry-dropdown {
+    width: 100%;
+    max-width: 100%; /* Ensure it doesn't exceed the container's width */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+}

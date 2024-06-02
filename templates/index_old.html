@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analyzer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .left-section {
+            width: 100%;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="submit"], input[type="date"], select {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+        #stock-data th:first-child,
+        #stock-data td:first-child {
+            border-left: none;
+        }
+        #stock-data th:last-child,
+        #stock-data td:last-child {
+            border-right: none;
+        }
+        #stock-data tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        #chart-container {
+            margin-top: 20px;
+            text-align: center;
+            width: 50%; /* Set chart width to half of the table */
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+        #loading-message {
+            display: none;
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        #pagination-controls {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin: 20px 0;
+        }
+        #pagination-controls button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        #pagination-controls button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        #pagination-controls span {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <h1>StockIT</h1>
+            <form id="stock-form">
+                <label for="stock-symbol">Stock<span style="color: red;">*</span>:</label>
+                <select id="stock-symbol" multiple required>
+                    <option value="" disabled>Multi-Select Stock Symbol</option>
+                    <!-- Stock symbols from NSE will be populated dynamically -->
+                </select>
+                <label for="from-date">From Date:<span style="color: red;">*</span>:</label>
+                <input type="date" id="from-date" required>
+                <label for="to-date">To Date:<span style="color: red;">*</span>:</label>
+                <input type="date" id="to-date" required><input type="submit" value="Submit">
+            </form>
+            <table id="stock-data">
+                <thead>
+                    <tr>
+                        <th>Stock</th>
+                        <th>Date</th>
+                        <th>Open</th>
+                        <th>High</th>
+                        <th>Low</th>
+                        <th>Close</th>
+                        <th>Volume</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Stock data rows will be populated dynamically -->
+                </tbody>
+            </table>
+            <div id="pagination-controls">
+                <button id="prev-page" onclick="prevPage()">Previous</button>
+                <span id="page-info"></span>
+                <button id="next-page" onclick="nextPage()">Next</button>
+            </div>
+            <div id="chart-container">
+                <!-- Chart will be displayed here -->
+                <canvas id="stock-chart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div id="loading-message">Please wait...</div>
+    <script src=https://cdn.jsdelivr.net/npm/chart.js></script>
+    <script>
+        let currentPage = 1;
+        const rowsPerPage = 10;
+        let stockDataArray = [];
+        let chartInstance; // Variable to store Chart.js instance
+ 
+        document.getElementById('stock-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+ 
+            // Show loading message
+            document.getElementById('loading-message').style.display = 'block';
+ 
+            // Get user input
+            var stockSymbolSelect = document.getElementById('stock-symbol');
+            var selectedOptions = Array.from(stockSymbolSelect.selectedOptions).map(option => option.value + '.BSE');
+            var fromDate = document.getElementById('from-date').value;
+            var toDate = document.getElementById('to-date').value;
+ 
+            // Validate dates
+            if (new Date(fromDate) > new Date(toDate)) {
+                alert('Error: From Date cannot be after To Date.');
+                document.getElementById('loading-message').style.display = 'none';
+                return;
+            }
+ 
+            // Fetch data for each selected stock symbol
+            Promise.all(selectedOptions.map(stockSymbol => fetchStockData(stockSymbol, fromDate, toDate)))
+                .then(data => {
+                    stockDataArray = data;
+                    currentPage = 1;
+                    updateStockDataTable(stockDataArray, fromDate, toDate);
+                    createStockChart(stockDataArray, fromDate, toDate);
+                    updatePaginationControls();
+                    document.getElementById('loading-message').style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Error fetching stock data:', error);
+                    alert('Error: ' + error.message);
+                    document.getElementById('loading-message').style.display = 'none';
+                });
+        });
+ 
+        var stockSymbolDropdown = document.getElementById('stock-symbol');
+        stockSymbolDropdown.innerHTML = ''; // Clear existing options
+ 
+        // Make an AJAX request to fetch stock symbols from the server
+        fetch('/get_stock_symbols')
+            .then(response => response.json())
+            .then(data => {
+                if (Array.isArray(data)) {
+                    data.forEach(symbol => {
+                        var option = document.createElement('option');
+                        option.value = symbol;
+                        option.text = symbol.split('.')[0];
+                        stockSymbolDropdown.appendChild(option);
+                    });
+                } else {
+                    throw new Error('Invalid data format received from server.');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching stock symbols:', error);
+                alert('Error fetching stock symbols. Please try again.');
+            });
+ 
+        function fetchStockData(stockSymbol, fromDate, toDate) {
+            var apiKey = 'G59GYR5NJFXHORZ7';
+            var apiUrl = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + stockSymbol + '&apikey=' + apiKey + '&outputsize=full';
+ 
+            return fetch(apiUrl)
+                .then(function(response) {
+                    if (!response.ok) {
+                        throw new Error('HTTP error, status = ' + response.status);
+                    }
+                    return response.json();
+                })
+                .then(function(data) {
+                    if (data['Error Message']) {
+                        throw new Error(data['Error Message']);
+                    }
+                    if (!data['Time Series (Daily)']) {
+                        throw new Error('No data found for the given stock symbol.');
+                    }
+                    return { stockSymbol, timeSeries: data['Time Series (Daily)'] };
+                })
+                .catch(function(error) {
+                    console.error('Error fetching stock data:', error);
+                    alert('Error fetching stock data. Please try again.');
+                    document.getElementById('loading-message').style.display = 'none';
+                });
+        }
+ 
+        function updateStockDataTable(stockDataArray, fromDate, toDate) {
+            var fromDateObj = new Date(fromDate);
+            var toDateObj = new Date(toDate);
+ 
+            var tableBody = document.querySelector('#stock-data tbody');
+            tableBody.innerHTML = ''; // Clear existing rows
+ 
+            stockDataArray.forEach(stockData => {
+                var { stockSymbol, timeSeries } = stockData;
+                for (var date in timeSeries) {
+                    var dateObj = new Date(date);
+                    if (dateObj >= fromDateObj && dateObj <= toDateObj) {
+                        var row = `
+                            <tr>
+                                <td>${stockSymbol.split('.')[0]}</td>
+                                <td>${date}</td>
+                                <td>${timeSeries[date]['1. open']}</td>
+                                <td>${timeSeries[date]['2. high']}</td>
+                                <td>${timeSeries[date]['3. low']}</td>
+                                <td>${timeSeries[date]['4. close']}</td>
+                                <td>${timeSeries[date]['5. volume']}</td>
+                            </tr>
+                        `;
+                        tableBody.innerHTML += row;
+                    }
+                }
+            });
+        }
+ 
+        function updatePaginationControls() {
+            const totalRows = stockDataArray.reduce((acc, stockData) => {
+                const { timeSeries } = stockData;
+                const fromDate = new Date(document.getElementById('from-date').value);
+                const toDate = new Date(document.getElementById('to-date').value);
+                for (let date in timeSeries) {
+                    const dateObj = new Date(date);
+                    if (dateObj >= fromDate && dateObj <= toDate) {
+                        acc++;
+                    }
+                }
+                return acc;
+            }, 0);
+ 
+            const totalPages = Math.ceil(totalRows / rowsPerPage);
+ 
+            document.getElementById('page-info').textContent = `Page ${currentPage} of ${totalPages}`;
+ 
+            document.getElementById('prev-page').disabled = currentPage === 1;
+            document.getElementById('next-page').disabled = currentPage === totalPages;
+        }
+ 
+        function nextPage() {
+            currentPage++;
+            updateStockDataTable(stockDataArray, document.getElementById('from-date').value, document.getElementById('to-date').value);
+            updatePaginationControls();
+        }
+ 
+        function prevPage() {
+            currentPage--;
+            updateStockDataTable(stockDataArray, document.getElementById('from-date').value, document.getElementById('to-date').value);
+            updatePaginationControls();
+        }
+ 
+        function createStockChart(stockDataArray, fromDate, toDate) {
+            var fromDateObj = new Date(fromDate);
+            var toDateObj = new Date(toDate);
+ 
+            var datasets = stockDataArray.map((stockData, index) => {
+                var { stockSymbol, timeSeries } = stockData;
+                var dates = [];
+                var closeValues = [];
+                for (var date in timeSeries) {
+                    var dateObj = new Date(date);
+                    if (dateObj >= fromDateObj && dateObj <= toDateObj) {
+                        dates.push(date);
+                        closeValues.push(timeSeries[date]['4. close']);
+                    }
+                }
+ 
+                dates.reverse();
+                closeValues.reverse();
+ 
+                return {
+                    label: stockSymbol.split('.')[0],
+                    data: closeValues,
+                    borderColor: getBorderColor(index), // Get different color for each dataset
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: false,
+                };
+            });
+ 
+            var ctx = document.getElementById('stock-chart').getContext('2d');
+            if (chartInstance) {
+                chartInstance.destroy(); // Destroy previous chart instance if exists
+            }
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: datasets.length > 0 ? datasets[0].data.map((_, index) => dates[index]) : [],
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Stock Close Price Over Time'
+                    },
+                    scales: {
+                        xAxes: [{
+                            type: 'time',
+                            time: {
+                                unit: 'day',
+                                displayFormats: {
+                                    day: 'DD/MM/YY'
+                                }
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Date'
+                            }
+                        }],
+                        yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Close Price'
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+ 
+        function getBorderColor(index) {
+            const colors = ['red', 'blue', 'green', 'orange', 'purple']; // Define colors
+            return colors[index % colors.length]; // Use modulo to cycle through colors
+        }
+    </script>
+</body>
+</html>

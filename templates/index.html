@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analyzer</title>
+    <!-- Updated CSS link -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='stock_style.css') }}">
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+ 
+        .banner {
+            background-color: purple;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+ 
+        .banner-title {
+            font-size: 32px;
+            margin: 0;
+        }
+ 
+        .content-container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 20px;
+        }
+ 
+        .left-section {
+            width: 70%;
+            padding: 0 20px;
+        }
+ 
+        .right-section {
+            width: 30%;
+            padding: 0 20px;
+        }
+ 
+        /* Styles for Top Performers section */
+        #top-performers-section {
+            margin-top: 20px;
+            padding: 20px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+ 
+        #top-performers-section h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+ 
+        #top-performers-chart-container {
+            text-align: center;
+        }
+ 
+        #top-performers-dropdown {
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="banner">
+            <h1 class="banner-title">StockIT</h1>
+        </div>
+        <div class="content-container">
+            <div class="left-section">
+                <form id="stock-form">
+                    <label for="stock-symbol">Stock<span style="color: red;">*</span>:</label>
+                    <select id="stock-symbol" multiple required>
+                        <option value="" disabled>Multi-Select Stock Symbol</option>
+                        <!-- Stock symbols from NSE will be populated dynamically -->
+                    </select>
+                    <label for="from-date">From Date:<span style="color: red;">*</span>:</label>
+                    <input type="date" id="from-date" required>
+                    <label for="to-date">To Date:<span style="color: red;">*</span>:</label>
+                    <input type="date" id="to-date" required><input type="submit" value="Submit">
+                </form>
+                <table id="stock-data">
+                    <thead>
+                        <tr>
+                            <th>Stock</th>
+                            <th>Date</th>
+                            <th>Open</th>
+                            <th>High</th>
+                            <th>Low</th>
+                            <th>Close</th>
+                            <th>Volume</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Stock data rows will be populated dynamically -->
+                    </tbody>
+                </table>
+                <div id="pagination-controls">
+                    <button id="prev-page" onclick="prevPage()">Previous</button>
+                    <span id="page-info"></span>
+                    <button id="next-page" onclick="nextPage()">Next</button>
+                </div>
+                <div id="chart-container">
+                    <!-- Chart will be displayed here -->
+                    <canvas id="stock-chart"></canvas>
+                </div>
+            </div>
+            <div class="right-section">
+                                                                   <h2>News Feed </h2>
+                                                                   <ul id="news-feed"></ul>
+                                                                   <div id="top-performers-section">
+                                                                                    <h2>Top Performers in Last 3 years</h2>
+                                                                                    <div id="top-performers-dropdown">
+                                                                                                     <label for="industry-dropdown">Industry:</label>
+                                                                                                     <select id="industry-dropdown">
+                                                                                                                      <!-- Options will be populated dynamically -->
+                                                                                                     </select>
+                                                                                    </div>
+                                                                                    <div id="top-performers-chart-container">
+                                                                                                     <!-- Chart for top performers will be displayed here -->
+                                                                                                     <canvas id="top-performers-chart"></canvas>
+                                                                                    </div>
+                                                   </div>
+</div>
+        </div>
+    </div>
+    <div id="loading-message">Please wait...</div>
+    <!-- Updated JavaScript links -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <script src="{{ url_for('static', filename='stock_script.js') }}"></script>
+</body>
+</html>

@@ -6,6 +6,11 @@ import feedparser
 
 app = Flask(__name__, static_url_path='/static')
 
+@app.after_request
+def add_cache_control(response):
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    return response
+
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
 

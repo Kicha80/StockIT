@@ -1,11 +1,11 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, Response  # Import Response
+
 import pandas as pd
 import logging
 import os
 import feedparser
 
 app = Flask(__name__, static_url_path='/static')
-
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
@@ -45,7 +45,7 @@ def fetch_news_from_rss():
 stock_symbols = load_stock_symbols()
 
 
-  @app.route('/')
+@app.route('/')
 def index():
     response = Response(render_template('index.html', stock_symbols=stock_symbols))
     response.headers['x-content-type-options'] = 'nosniff'  # Adding x-content-type-options header

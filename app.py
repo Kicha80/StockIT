@@ -1,7 +1,8 @@
 from flask import Flask, render_template, jsonify, request
 import pandas as pd
 import logging
-import os  # Import the os module
+import os
+import feedparser
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -25,6 +26,17 @@ def load_industries():
         app.logger.error(f"Error loading industries: {str(e)}")
         return []
 
+def fetch_news_from_rss():
+    feed_url = 'https://www.moneycontrol.com/rss/MCtopnews.xml'  # Example RSS feed URL
+    feed = feedparser.parse(feed_url)
+    news_items = []
+    for entry in feed.entries[:5]:  # Limit to the first 5 news items
+        news_items.append({
+            'title': entry.title,
+            'link': entry.link
+        })
+    return news_items
+
 stock_symbols = load_stock_symbols()
 
 @app.route('/')
@@ -46,7 +58,6 @@ def get_top_performers():
     if not industry:
         return jsonify({'error': 'Industry not specified'}), 400
 
-    # Log the file path before attempting to read the Excel file
     excel_file_path = 'Stocks_top_Perf.xlsx'
     app.logger.info(f"Attempting to read Excel file from path: {os.path.abspath(excel_file_path)}")
 
@@ -58,6 +69,15 @@ def get_top_performers():
         return jsonify(top_performers_dict)
     except Exception as e:
         app.logger.error(f"Error fetching top performers data: {str(e)}")
+        return jsonify({'error': 'Internal server error'}), 500
+
+@app.route('/get_news_headlines', methods=['GET'])
+def get_news_headlines():
+    try:
+        news_items = fetch_news_from_rss()
+        return jsonify(news_items)
+    except Exception as e:
+        app.logger.error(f"Error fetching news headlines: {str(e)}")
         return jsonify({'error': 'Internal server error'}), 500
 
 if __name__ == '__main__':

@@ -335,23 +335,10 @@ function nextPage() {
 }
 
 function fetchNewsHeadlines() {
-    const url = 'https://newsapi.org/v2/top-headlines';
-    const apiKey = '30bd19ffe3fc40c7bd199544bb554eeb';
-    const country = 'in';
-    const category = 'business';
-    const q = 'stock';
-
-    const params = {
-        apiKey,
-        country,
-        category,
-        q
-    };
-
-    fetch(url + '?' + new URLSearchParams(params))
+    fetch('/get_news_headlines')
         .then(response => response.json())
         .then(data => {
-            updateNewsFeed(data.articles);
+            updateNewsFeed(data);
         })
         .catch(error => {
             console.error('Error fetching news headlines:', error);
@@ -364,10 +351,10 @@ function updateNewsFeed(articles) {
     newsFeed.innerHTML = '';
 
     if (articles.length > 0) {
-        articles.slice(0, 5).forEach(article => {
+        articles.forEach(article => {
             const li = document.createElement('li');
             const a = document.createElement('a');
-            a.href = article.url;
+            a.href = article.link;
             a.textContent = article.title;
             li.appendChild(a);
             newsFeed.appendChild(li);

@@ -45,9 +45,9 @@ def fetch_news_from_rss():
 stock_symbols = load_stock_symbols()
 
 
-@app.route('/')
+  @app.route('/')
 def index():
-    response = render_template('index.html', stock_symbols=stock_symbols)
+    response = Response(render_template('index.html', stock_symbols=stock_symbols))
     response.headers['x-content-type-options'] = 'nosniff'  # Adding x-content-type-options header
     return response
 

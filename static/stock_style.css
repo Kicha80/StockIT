@@ -1,3 +1,6 @@
+/* stock_style.css */
+
+/* Global styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -5,6 +8,7 @@ body {
     padding: 0;
 }
 
+/* Container styles */
 .container {
     display: flex;
     justify-content: space-between;
@@ -16,29 +20,50 @@ body {
     overflow: hidden;
 }
 
+/* CSS for the label above the dropdown */
+form label[for="stock-symbol"] {
+    display: block;
+    margin-bottom: 0px;
+    font-weight: bold;
+    color: #333; /* Optional: Adjust color as needed */
+    font-size: 14px; /* Optional: Adjust font size as needed */
+}
+
+/* Left section styles */
 .left-section {
     padding: 20px;
     width: 70%;
 }
 
+/* Heading styles */
 h1 {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
 }
 
+/* Form styles */
 form {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
 
-input[type="text"], input[type="submit"], input[type="date"], select {
+input[type="text"],
+input[type="submit"],
+input[type="date"],
+select {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
+	/*font-weight: bold;*/
     border-radius: 5px;
-    margin-right: 10px;
+    margin-right: 15px;
+}
+
+.bold-label {
+    font-weight: bold;
+	margin-right: 10px;
 }
 
 input[type="submit"] {
@@ -48,13 +73,15 @@ input[type="submit"] {
     cursor: pointer;
 }
 
+/* Table styles */
 table {
     width: 80%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-th, td {
+th,
+td {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: left;
@@ -67,6 +94,7 @@ th {
     padding-bottom: 12px;
 }
 
+/* Additional table styles */
 #stock-data th:first-child,
 #stock-data td:first-child {
     border-left: none;
@@ -81,6 +109,7 @@ th {
     background-color: #f2f2f2;
 }
 
+/* Chart container styles */
 #chart-container {
     margin-top: 20px;
     text-align: center;
@@ -91,6 +120,7 @@ canvas {
     height: auto;
 }
 
+/* Loading message styles */
 #loading-message {
     display: none;
     text-align: center;
@@ -98,11 +128,12 @@ canvas {
     margin-top: 20px;
 }
 
+/* Pagination controls styles */
 #pagination-controls {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin: 20px 0; /* Adjust margin to place below table */
+    margin: 20px 0;
 }
 
 #pagination-controls button {
@@ -121,23 +152,24 @@ canvas {
     cursor: not-allowed;
 }
 
+/* Stock data table styles */
 #stock-data {
-    width: 100%; /* Ensure table takes full width of left section */
+    width: 100%;
 }
 
+/* News section styles */
 #news-section {
     padding: 20px;
     width: 30%;
-    margin-left: 60px; /* Add margin to separate from table */
+    margin-left: 60px;
 }
 
+/* Pagination controls span styles */
 #pagination-controls span {
     font-size: 16px;
 }
 
-
-
-/* Add these styles for the chatbot interface */
+/* Chat container styles */
 #chat-container {
     width: 100%;
     max-width: 600px;
@@ -148,11 +180,13 @@ canvas {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Chat messages styles */
 #chat-messages {
     max-height: 300px;
     overflow-y: auto;
 }
 
+/* Chat form styles */
 #chat-form {
     display: flex;
     margin-top: 20px;
@@ -176,13 +210,14 @@ canvas {
     color: white;
     cursor: pointer;
 }
-/* Update styles for the News Feed section */
+
+/* Right section styles */
 .right-section {
     width: 30%;
-    padding: 15px; /* Reduced padding */
+    padding: 15px;
     background-color: #f0f0f0;
     border-radius: 10px;
-    margin-top: -20px; /* Push the section up */
+    margin-top: -20px;
 }
 
 .right-section h2 {
@@ -194,6 +229,7 @@ canvas {
     padding-bottom: 10px;
 }
 
+/* News feed styles */
 #news-feed {
     list-style: none;
     padding: 0;
@@ -201,30 +237,32 @@ canvas {
 }
 
 #news-feed li {
-    margin-bottom: 0; /* Remove margin */
+    margin-bottom: 0;
 }
 
 #news-feed li a {
     display: block;
     padding: 10px;
-    text-decoration: underline; /* Underline the links */
-    font-size: 16px; /* Increased font size */
-    font-style: italic; /* Italic font style */
+    text-decoration: underline;
+    font-size: 16px;
+    font-style: italic;
 }
 
 #news-feed li:nth-child(odd) a {
-    color: #3366cc; /* Blue color for odd links */
+    color: #3366cc;
 }
 
 #news-feed li:nth-child(even) a {
-    color: #964B00; /* Brown color for even links */
+    color: #964B00;
 }
 
 #news-feed li:nth-child(3n) a {
-    color: #FF0000; /* Red color for every third link */
+    color: #FF0000;
 }
+
+/* Banner styles */
 .banner {
-    background-color: rgb(130, 230, 200); /* Very light purple */
+    background-color: rgb(130, 230, 200);
     color: white;
     text-align: center;
     padding: 20px;
@@ -237,8 +275,7 @@ canvas {
     transform: translateY(-2px);
 }
 
-/* Additional styling for News Feed section */
-
+/* Top performers dropdown styles */
 #top-performers-dropdown {
     margin-bottom: 20px;
     font-size: 14px;
@@ -247,8 +284,62 @@ canvas {
     justify-content: center;
 }
 
+/* Industry dropdown styles */
 #industry-dropdown {
     width: 100%;
-    max-width: 100%; /* Ensure it doesn't exceed the container's width */
-    box-sizing: border-box; /* Include padding and border in the element's total width */
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Select2 container styles */
+.select2-container--default .select2-selection--multiple {
+    width: 100%;
+    max-width: 300px;
+    background-color: #fff;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    cursor: text;
+    padding: 5px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #4CAF50;
+    border: 1px solid #4CAF50;
+    border-radius: 2px;
+    color: purple;
+    margin: 2px;
+    padding: 2px 5px;
+    font-size: 13px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+    background-color: #333;
+    color: white;
+}
+
+.select2-container--default .select2-selection--multiple .select2-search--inline {
+    float: left;
+    margin: 2px;
+    padding: 0;
+}
+
+.select2-container--default .select2-selection--multiple .select2-search__field {
+    border: none;
+    margin-top: 5px;
+    padding: 5px;
 }

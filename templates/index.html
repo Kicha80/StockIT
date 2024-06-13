@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Analyzer</title>
     <link rel="stylesheet" href="../static/stock_style.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         .container {
             display: flex;
@@ -78,14 +79,14 @@
         <div class="content-container">
             <div class="left-section">
                 <form id="stock-form">
-                    <label for="stock-symbol">Stock<span style="color: red;">*</span>:</label>
+                    <label for="stock-symbol">Stocks<span style="color: red;">*</span>:</label>
                     <select id="stock-symbol" multiple required>
                         <option value="" disabled>Multi-Select Stock Symbol</option>
                         <!-- Stock symbols from NSE will be populated dynamically -->
                     </select>
-                    <label for="from-date">From Date:<span style="color: red;">*</span>:</label>
+                    <label for="from-date" class="bold-label"> From Date<span style="color: red;">*</span>:</label>
                     <input type="date" id="from-date" required>
-                    <label for="to-date">To Date:<span style="color: red;">*</span>:</label>
+                    <label for="to-date" class="bold-label">To Date<span style="color: red;">*</span>:</label>
                     <input type="date" id="to-date" required><input type="submit" value="Submit">
                 </form>
                 <table id="stock-data">
@@ -136,6 +137,17 @@
     <div id="loading-message">Please wait...</div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="../static/stock_script.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#stock-symbol').select2({
+                placeholder: "Multi-Select Stock Symbol",
+                allowClear: true,
+                width: '40%'
+            });
+        });
+    </script>
 </body>
 </html>

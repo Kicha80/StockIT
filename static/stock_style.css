@@ -6,14 +6,12 @@ body {
     padding: 0;
 }
 
-/* Container styles */
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Banner styles */
 .banner {
     background-color: purple;
     color: white;
@@ -47,7 +45,20 @@ body {
     }
 }
 
-/* Content container styles */
+/* Animation for scrolling */
+@keyframes scroll {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(calc(-100% + 40px)); /* Adjust as per headline height and margin */
+    }
+}
+
+.scrolling-news {
+    animation: scroll 30s linear infinite; /* Adjust duration as needed */
+}
+
 .content-container {
     display: flex;
     width: 100%;
@@ -68,32 +79,42 @@ body {
 /* Form styles */
 form {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     margin-bottom: 20px;
-}
-
-input[type="text"],
-input[type="date"],
-select {
-    padding: 8px;
-    font-size: 12.8px; /* Reduced font size by 20% */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 12px; /* Reduced margin by 20% */
-    width: 80%; /* Reduced width by 20% */
-}
-
-input[type="submit"] {
-    background-color: #D3D3D3; /* Light grey color */
-    color: black; /* Darker color for better contrast */
-    border: none;
-    cursor: pointer;
-    width: 50%; /* Fixed width, reduced by 50% from default */
 }
 
 .bold-label {
     font-weight: bold;
-    margin-right: 8px; /* Reduced margin by 20% */
+    margin-right: 10px;
+}
+
+.date-submit-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px; /* Adjust margin as needed */
+}
+
+.date-fields {
+    display: flex;
+    align-items: center;
+}
+
+input[type="date"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
 }
 
 /* Table styles */
@@ -106,14 +127,13 @@ table {
 th,
 td {
     border: 1px solid #ddd;
-    padding: 8px; /* Reduced padding by 20% */
+    padding: 10px;
     text-align: left;
-    font-size: 12.8px; /* Reduced font size by 20% */
 }
 
 th {
-    background-color: #D3D3D3; /* Light grey color */
-    color: black; /* Darker color for better contrast */
+    background-color: #4CAF50;
+    color: white;
 }
 
 /* Additional table styles */
@@ -159,13 +179,13 @@ canvas {
 }
 
 #pagination-controls button {
-    padding: 8px; /* Reduced padding by 20% */
-    font-size: 12.8px; /* Reduced font size by 20% */
-    margin: 0 4px; /* Reduced margin by 20% */
+    padding: 10px;
+    font-size: 16px;
+    margin: 0 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #D3D3D3; /* Light grey color */
-    color: black; /* Darker color for better contrast */
+    background-color: #4CAF50;
+    color: white;
     cursor: pointer;
 }
 
@@ -174,24 +194,15 @@ canvas {
     cursor: not-allowed;
 }
 
-/* Stock data table styles */
-#stock-data {
-    width: 100%;
-}
-
-/* Styling for News Feed and Top Performers titles */
+/* News Section Styles */
 #news-section {
     padding: 20px;
-    width: calc(100% - 40px);
-    max-width: 600px;
+    width: 100%;
+    max-width: 100%;
     margin-top: 20px;
-    background-color: #b87357;
-    color: #fff;
+    background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    font-size: 24px;
-    font-style: italic;
 }
 
 #top-performers-section {
@@ -222,6 +233,11 @@ canvas {
 }
 
 /* Select2 container styles */
+.select2-container {
+    width: 100%;
+    max-width: 300px;
+}
+
 .select2-container--default .select2-selection--multiple {
     width: 100%;
     max-width: 300px;
@@ -274,11 +290,25 @@ canvas {
     padding: 5px;
 }
 
-/* Styles for News Feed section */
+/* News Section Styles */
+#news-section {
+    padding: 20px;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Ensure overflow is hidden to contain the scrolling */
+}
+
+
 #news-feed {
     list-style: none;
     padding: 0;
     margin: 0;
+    height: 190px; /* Fixed height to show 5 headlines at a time */
+    overflow: hidden; /* Hide overflow content initially */
 }
 
 #news-feed li {
@@ -291,7 +321,9 @@ canvas {
     text-decoration: underline;
     font-size: 16px;
     font-style: italic;
+    white-space: nowrap; /* Prevent wrapping of long headlines */
 }
+
 
 #news-feed li:nth-child(odd) a {
     color: #3366cc;
@@ -314,4 +346,9 @@ canvas {
     font-family: 'Arial Black', sans-serif;
     color: #333;
     text-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+}
+
+/* Adjust margin-top for specific h2 */
+#news-section h2 {
+    margin-top: -35px; /* Adjust based on your requirement */
 }

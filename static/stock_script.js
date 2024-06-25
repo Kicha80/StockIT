@@ -363,3 +363,10 @@ function updateNewsFeed(articles) {
         newsFeed.innerHTML = '<li>No news available</li>';
     }
 }
+// Initialize Select2 for the stock-symbol dropdown
+$(document).ready(function() {
+    $('#stock-symbol').select2({
+        placeholder: "Select Stock Symbols",
+        width: '100%'
+    });
+});

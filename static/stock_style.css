@@ -17,8 +17,8 @@ body {
 .banner {
     background-color: purple;
     color: white;
-    text-align: center;
-    padding: 20px;
+    text-align: center; /* Center align for banner */
+    padding-left: 20px; /* Adjust left padding */
     margin-bottom: 20px;
     width: 100%;
 }
@@ -27,8 +27,10 @@ body {
     font-size: 28px; /* Reduced font size */
     margin: 0;
     text-decoration: underline;
+	padding-left: 400px; /* Adjust left padding */
     color: #ffcc00;
     font-style: italic;
+    text-align: right; /* Center align the banner title */
 }
 
 .catch-phrase {
@@ -36,7 +38,10 @@ body {
     color: #666;
     font-size: 14px; /* Reduced font size */
     animation: moveLeftRight 10s linear infinite;
+	padding-left: 200px; /* Adjust left padding */
+    text-align: right; /* Align catch phrase to the left */
 }
+
 
 /* Animation for scrolling */
 @keyframes moveLeftRight {

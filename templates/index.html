@@ -5,12 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Analyzer</title>
     <link rel="stylesheet" href="../static/stock_style.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.### Updated HTML (`index.html`):
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analyzer</title>
+    <link rel="stylesheet" href="../static/stock_style.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
         <h1 class="banner-title">StockBlitz</h1>
         <p class="catch-phrase">- <span id="catchy-phrase">Empowering Your Investment Decisions</span></p>
+        
+        <!-- Menu line with five columns -->
+        <div class="menu-bar">
+            <div class="menu-title">Menu 1</div>
+            <div class="menu-title">Menu 2</div>
+            <div class="menu-title">Menu 3</div>
+            <div class="menu-title">Menu 4</div>
+            <div class="menu-title">Menu 5</div>
+        </div>
+        
         <div class="content-container">
             <div class="left-section">
                 <form id="stock-form">
@@ -58,7 +78,7 @@
             </div>
             <div class="right-section">
                 <div id="news-section">
-                    <h2>Ebiz News</h2> <!-- Updated caption for news feed -->
+                    <h2 class="section-title fancy-title">Ebiz News</h2>
                     <div id="news-feed-container">
                         <ul id="news-feed" class="scrolling-news">
                             <!-- Populate with 10 news feed items -->
@@ -76,7 +96,7 @@
                     </div>
                 </div>
                 <div id="top-performers-section">
-                    <h2>Top Performers in Last 3 years</h2>
+                    <h2 class="section-title fancy-title">Top Performers in Last 3 years</h2>
                     <div id="top-performers-dropdown">
                         <label for="industry-dropdown">Industry:</label>
                         <select id="industry-dropdown">

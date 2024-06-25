@@ -76,6 +76,7 @@ document.getElementById('industry-dropdown').addEventListener('change', function
         });
 });
 
+
 function updateTopPerformersChart(data) {
     var topPerformersChart = document.getElementById('top-performers-chart').getContext('2d');
     if (window.topPerformersChartInstance) {

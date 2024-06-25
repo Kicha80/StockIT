@@ -6,225 +6,6 @@
     <title>Stock Analyzer</title>
     <link rel="stylesheet" href="../static/stock_style.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <style>
-        /* General styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .banner {
-            background-color: purple;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-bottom: 20px;
-            width: 100%;
-        }
-
-        .banner-title {
-            font-size: 32px;
-            margin: 0;
-            text-decoration: underline;
-            color: #ffcc00; /* Nice color shade */
-            font-style: italic;
-        }
-
-        .catch-phrase {
-            font-style: italic;
-            color: #666;
-            font-size: 16px;
-            animation: moveLeftRight 10s linear infinite; /* Animation for left to right movement */
-        }
-
-        @keyframes moveLeftRight {
-            0% {
-                transform: translateX(-100%);
-            }
-            100% {
-                transform: translateX(100%);
-            }
-        }
-
-        .content-container {
-            display: flex;
-            width: 100%;
-            max-width: 1200px;
-            margin-top: 20px;
-        }
-
-        .left-section {
-            width: 70%;
-            padding: 0 20px;
-        }
-
-        .right-section {
-            width: 30%;
-            padding: 0 20px;
-        }
-
-        /* Styles for form and table */
-        form {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        input[type="text"],
-        input[type="submit"],
-        input[type="date"],
-        select {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-right: 15px;
-        }
-
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        /* Additional styles */
-        #stock-data th:first-child,
-        #stock-data td:first-child {
-            border-left: none;
-        }
-
-        #stock-data th:last-child,
-        #stock-data td:last-child {
-            border-right: none;
-        }
-
-        #stock-data tbody tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        /* Chart styles */
-        #chart-container {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        canvas {
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* Loading message styles */
-        #loading-message {
-            display: none;
-            text-align: center;
-            font-size: 18px;
-            margin-top: 20px;
-        }
-
-        /* Pagination styles */
-        #pagination-controls {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            margin: 20px 0;
-        }
-
-        #pagination-controls button {
-            padding: 10px;
-            font-size: 16px;
-            margin: 0 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-        }
-
-        #pagination-controls button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-
-        /* News section styles */
-        #news-section {
-            padding: 20px;
-            width: 100%;
-            max-width: 100%; /* Adjust the max-width as per your requirement */
-            margin-top: 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Chat container styles */
-        #chat-container {
-            width: 100%;
-            max-width: 600px;
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Chat messages styles */
-        #chat-messages {
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        /* Chat form styles */
-        #chat-form {
-            display: flex;
-            margin-top: 20px;
-        }
-
-        #chat-input {
-            flex: 1;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-
-        #chat-form button {
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -233,15 +14,21 @@
         <div class="content-container">
             <div class="left-section">
                 <form id="stock-form">
-                    <label for="stock-symbol">Stocks<span style="color: red;">*</span>:</label>
-                    <select id="stock-symbol" multiple required>
-                        <option value="" disabled>Multi-Select Stock Symbol</option>
-                        <!-- Stock symbols from NSE will be populated dynamically -->
+                    <label for="stock-symbol" class="bold-label">Stocks<span style="color: red;">*</span>:</label>
+                    <select id="stock-symbol" multiple="multiple" required class="js-example-basic-multiple">
+                        <option value="" disabled>Select Stock Symbols</option>
+                        <!-- Stock symbols will be populated dynamically -->
                     </select>
-                    <label for="from-date" class="bold-label"> From Date<span style="color: red;">*</span>:</label>
-                    <input type="date" id="from-date" required>
-                    <label for="to-date" class="bold-label">To Date<span style="color: red;">*</span>:</label>
-                    <input type="date" id="to-date" required><input type="submit" value="Submit">
+
+                    <div class="date-submit-container">
+                        <div class="date-fields">
+                            <label for="from-date" class="bold-label">From Date<span style="color: red;">*</span>:</label>
+                            <input type="date" id="from-date" required>
+                            <label for="to-date" class="bold-label">To Date<span style="color: red;">*</span>:</label>
+                            <input type="date" id="to-date" required>
+                        </div>
+                        <input type="submit" value="Submit">
+                    </div>
                 </form>
                 <table id="stock-data">
                     <thead>
@@ -271,9 +58,19 @@
             </div>
             <div class="right-section">
                 <div id="news-section">
-                    <h2>News Feed</h2>
-                    <ul id="news-feed">
-                        <!-- News feed items dynamically populated -->
+                    <h2>Ebiz News</h2> <!-- Updated caption for news feed -->
+                    <ul id="news-feed" class="scrolling-news">
+                        <!-- Populate with 10 news feed items -->
+                        <li><a href="#">Headline 1</a></li>
+                        <li><a href="#">Headline 2</a></li>
+                        <li><a href="#">Headline 3</a></li>
+                        <li><a href="#">Headline 4</a></li>
+                        <li><a href="#">Headline 5</a></li>
+                        <li><a href="#">Headline 6</a></li>
+                        <li><a href="#">Headline 7</a></li>
+                        <li><a href="#">Headline 8</a></li>
+                        <li><a href="#">Headline 9</a></li>
+                        <li><a href="#">Headline 10</a></li>
                     </ul>
                 </div>
                 <div id="top-performers-section">
@@ -294,19 +91,9 @@
     </div>
     <div id="loading-message">Please wait...</div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="../static/stock_script.js"></script>
-<script>
-$(document).ready(function() {
-$('#stock-symbol').select2({
-placeholder: "Multi-Select Stock Symbol",
-allowClear: true,
-width: '40%'
-});
-});
-</script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="../static/stock_script.js"></script>
 </body>
 </html>

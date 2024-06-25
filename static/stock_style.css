@@ -9,7 +9,9 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start; /* Align contents to the left */
+    padding-left: 20px; /* Adjust left padding */
+    padding-right: 20px; /* Adjust right padding */
 }
 
 .banner {
@@ -22,7 +24,7 @@ body {
 }
 
 .banner-title {
-    font-size: 32px;
+    font-size: 28px; /* Reduced font size */
     margin: 0;
     text-decoration: underline;
     color: #ffcc00;
@@ -32,10 +34,11 @@ body {
 .catch-phrase {
     font-style: italic;
     color: #666;
-    font-size: 16px;
+    font-size: 14px; /* Reduced font size */
     animation: moveLeftRight 10s linear infinite;
 }
 
+/* Animation for scrolling */
 @keyframes moveLeftRight {
     0% {
         transform: translateX(-100%);
@@ -45,20 +48,7 @@ body {
     }
 }
 
-/* Animation for scrolling */
-@keyframes scroll {
-    0% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(calc(-100% + 40px)); /* Adjust as per headline height and margin */
-    }
-}
-
-.scrolling-news {
-    animation: scroll 30s linear infinite; /* Adjust duration as needed */
-}
-
+/* Content container and form */
 .content-container {
     display: flex;
     width: 100%;
@@ -76,33 +66,33 @@ body {
     padding: 0 20px;
 }
 
-/* Form styles */
 .form-group {
     display: flex;
     align-items: center;
-    margin-bottom: 10px; /* Add margin as needed */
+    margin-bottom: 8px; /* Reduced margin */
 }
 
 .bold-label {
     font-weight: bold;
-    margin-right: 10px;
+    margin-right: 10px; /* Reduced margin */
+    font-size: 14px; /* Reduced font size */
 }
 
-/* Align the label with the left margin */
 label[for="stock-symbol"] {
     display: inline-block;
-    width: 100px; /* Adjust this value as needed to align with the date fields */
+    width: 90px; /* Adjusted width */
     text-align: left;
-    /* margin-right: 10px;  Add some spacing between the label and the dropdown */
+    font-size: 14px; /* Reduced font size */
+	margin-right: 2px; /* Adjusted margin */
 }
 
 input[type="date"], select.js-example-basic-multiple {
-    padding: 10px;
-    font-size: 16px;
+    padding: 8px;
+    font-size: 14px; /* Reduced font size */
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-right: 10px;
-    width: 250px; /* Adjust width to be slightly broader than date fields */
+    margin-right: 8px; /* Reduced margin */
+    width: 120px; /* Reduced width */
 }
 
 input[type="submit"] {
@@ -110,85 +100,45 @@ input[type="submit"] {
     color: white;
     border: none;
     cursor: pointer;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 8px 12px; /* Adjusted padding */
+    font-size: 14px; /* Reduced font size */
 }
 
 /* Table styles */
 table {
-    width: 100%;
+    width: calc(100% - 20px); /* Shrink table width */
     border-collapse: collapse;
     margin-top: 20px;
+    margin-right: 10px; /* Adjusted margin */
 }
 
 th,
 td {
     border: 1px solid #ddd;
-    padding: 10px;
+    padding: 8px;
     text-align: left;
+    font-size: 14px; /* Reduced font size */
 }
 
 th {
     background-color: #FF6347; /* Red */
     color: white;
-}
-
-/* Additional table styles */
-#stock-data th:first-child,
-#stock-data td:first-child {
-    border-left: none;
-}
-
-#stock-data th:last-child,
-#stock-data td:last-child {
-    border-right: none;
-}
-
-#stock-data tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-/* Chart container styles */
-#chart-container {
-    margin-top: 20px;
-    text-align: center;
-}
-
-canvas {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Loading message styles */
-#loading-message {
-    display: none;
-    text-align: center;
-    font-size: 18px;
-    margin-top: 20px;
+    font-size: 14px; /* Reduced font size */
 }
 
 /* Pagination controls styles */
 #pagination-controls {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin: 20px 0;
+    justify-content: flex-end; /* Align pagination controls to the right */
+    align-items: center; /* Align items vertically */
+    margin-top: 20px;
+    margin-right: 10px; /* Adjusted margin */
 }
 
 #pagination-controls button {
-    padding: 10px;
-    font-size: 16px;
-    margin: 0 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #FF6347; /* Red */
-    color: white;
-    cursor: pointer;
-}
-
-#pagination-controls button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+    padding: 6px 12px; /* Adjusted padding */
+    font-size: 14px; /* Reduced font size */
+    margin: 0 4px; /* Reduced margin */
 }
 
 /* News Section Styles */
@@ -196,7 +146,7 @@ canvas {
     padding: 20px;
     width: 100%;
     max-width: 100%;
-    margin-top: 10px; /* Adjust margin to push the section up */
+    margin-top: 44px;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -216,8 +166,9 @@ canvas {
 }
 
 #news-feed li {
-    padding: 10px;
+    padding: 8px;
     border-bottom: 1px solid #ddd;
+    font-size: 14px; /* Reduced font size */
 }
 
 #news-feed a {
@@ -236,7 +187,7 @@ canvas {
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px; /* Reduced bottom margin */
+    margin-bottom: 10px;
 }
 
 #top-performers-dropdown {
@@ -244,29 +195,27 @@ canvas {
 }
 
 #industry-dropdown {
-    height: 40px; /* Increased height */
+    height: 40px;
 }
 
 #top-performers-dropdown label {
-    font-size: 18px; /* Bigger font size */
-    color: blue; /* Blue font color */
-}
-
-#top-performers-chart-container {
-    text-align: center;
+    font-size: 16px; /* Adjusted font size */
+    color: blue;
 }
 
 /* Section title styles */
 .fancy-title {
     color: red;
     text-decoration: underline;
-    padding-bottom: 10px;
+    padding-bottom: 8px; /* Reduced padding */
     border-bottom: 2px solid red;
     margin-top: 0;
+    font-size: 18px; /* Adjusted font size */
 }
 
 h2 {
-    color: red; /* Red color for Ebiz News and Top Performers titles */
+    color: red;
+    font-size: 18px; /* Adjusted font size */
 }
 
 /* Adjusting the appearance of the Select2 multi-select */
@@ -322,22 +271,37 @@ h2 {
     width: auto !important;
 }
 
-/* Menu bar with 5 titles */
+/* Menu bar with five titles */
 .menu-bar {
-    background-color: brown; /* Filled with brown color */
+    background-color: brown;
     display: flex;
     justify-content: space-around;
     margin-bottom: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
-    width: 100%; /* Ensure it spans the full width */
+    width: 100%;
     box-sizing: border-box;
 }
 
 .menu-title {
-    font-size: 16px;
+    font-size: 14px; /* Reduced font size */
     color: white;
-    font-weight: bold; /* Make the menu titles bold */
-    flex: 1; /* Distribute titles equally */
+    font-weight: bold;
+    flex: 1;
     text-align: center;
+}
+
+/* New styles for the historical data section */
+.historical-data-section {
+    border: 2px solid #000;
+    padding: 20px;
+    margin-top: 40px;
+    text-align: left;
+}
+
+.section-caption {
+    font-size: 16px; /* Adjusted font size */
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: left;
 }

@@ -77,11 +77,10 @@ body {
 }
 
 /* Form styles */
-form {
+.form-group {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 20px;
+    align-items: center;
+    margin-bottom: 10px; /* Add margin as needed */
 }
 
 .bold-label {
@@ -89,27 +88,25 @@ form {
     margin-right: 10px;
 }
 
-.date-submit-container {
-    display: flex;
-    align-items: center;
-    margin-top: 10px; /* Adjust margin as needed */
+/* Align the label with the left margin */
+label[for="stock-symbol"] {
+    display: inline-block;
+    width: 100px; /* Adjust this value as needed to align with the date fields */
+    text-align: left;
+    /* margin-right: 10px;  Add some spacing between the label and the dropdown */
 }
 
-.date-fields {
-    display: flex;
-    align-items: center;
-}
-
-input[type="date"] {
+input[type="date"], select.js-example-basic-multiple {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-right: 10px;
+    width: 250px; /* Adjust width to be slightly broader than date fields */
 }
 
 input[type="submit"] {
-    background-color: #4CAF50;
+    background-color: #FF6347; /* Red */
     color: white;
     border: none;
     cursor: pointer;
@@ -132,7 +129,7 @@ td {
 }
 
 th {
-    background-color: #4CAF50;
+    background-color: #FF6347; /* Red */
     color: white;
 }
 
@@ -184,7 +181,7 @@ canvas {
     margin: 0 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #4CAF50;
+    background-color: #FF6347; /* Red */
     color: white;
     cursor: pointer;
 }
@@ -199,12 +196,9 @@ canvas {
     padding: 20px;
     width: 100%;
     max-width: 100%;
-    margin-top: 20px;
+    margin-top: 10px; /* Adjust margin to push the section up */
     background-color: #ffffff;
     border-radius: 10px;
-    box### Continued `stock_style.css`:
-
-```css
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -242,26 +236,108 @@ canvas {
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px; /* Reduced bottom margin */
 }
 
 #top-performers-dropdown {
     margin-bottom: 20px;
 }
 
+#industry-dropdown {
+    height: 40px; /* Increased height */
+}
+
+#top-performers-dropdown label {
+    font-size: 18px; /* Bigger font size */
+    color: blue; /* Blue font color */
+}
+
 #top-performers-chart-container {
     text-align: center;
 }
 
-/* Select2 Styles */
-.select2-container {
-    width: 100% !important;
+/* Section title styles */
+.fancy-title {
+    color: red;
+    text-decoration: underline;
+    padding-bottom: 10px;
+    border-bottom: 2px solid red;
+    margin-top: 0;
 }
 
-.select2-selection {
-    height: 38px !important;
-    display: flex !important;
-    align-items: center !important;
-    padding: 0 10px !important;
-    border: 1px solid #ccc !important;
-    border-radius: 5px !important;
+h2 {
+    color: red; /* Red color for Ebiz News and Top Performers titles */
+}
+
+/* Adjusting the appearance of the Select2 multi-select */
+.select2-container--default .select2-selection--multiple {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: text;
+    height: 40px; /* Adjust to match the date fields */
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    width: 250px; /* Adjust width to be slightly broader than date fields */
+}
+
+.select2-container {
+    width: 250px !important; /* Ensure the Select2 container respects the width */
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    display: inline;
+    padding: 0;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #e4e4e4;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    margin: 3px 2px;
+    padding: 3px 5px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: #888;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-search--inline {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+.select2-container--default .select2-selection--multiple .select2-search__field {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: auto !important;
+}
+
+/* Menu bar with 5 titles */
+.menu-bar {
+    background-color: brown; /* Filled with brown color */
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%; /* Ensure it spans the full width */
+    box-sizing: border-box;
+}
+
+.menu-title {
+    font-size: 16px;
+    color: white;
+    font-weight: bold; /* Make the menu titles bold */
+    flex: 1; /* Distribute titles equally */
+    text-align: center;
 }

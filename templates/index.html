@@ -5,16 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Analyzer</title>
     <link rel="stylesheet" href="../static/stock_style.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.### Updated HTML (`index.html`):
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Analyzer</title>
-    <link rel="stylesheet" href="../static/stock_style.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
@@ -24,57 +14,60 @@
         
         <!-- Menu line with five columns -->
         <div class="menu-bar">
-            <div class="menu-title">Menu 1</div>
-            <div class="menu-title">Menu 2</div>
-            <div class="menu-title">Menu 3</div>
-            <div class="menu-title">Menu 4</div>
-            <div class="menu-title">Menu 5</div>
+            <a href="https://www.moneycontrol.com/markets/global-indices/" class="menu-title">Global Markets</a>
+            <a href="https://www.moneycontrol.com/stocks/marketstats/nsegainer/index.php" class="menu-title">Top Gainers</a>
+            <a href="https://www.moneycontrol.com/stocks/marketstats/nse_pshockers/index.php" class="menu-title">PriceShockers</a>
+            <a href="https://www.moneycontrol.com/news/business/ipo/" class="menu-title">IPO</a>
+            <a href="https://www.moneycontrol.com/stocks/marketstats/nsehigh/index.php" class="menu-title">52Week High</a>
         </div>
         
         <div class="content-container">
             <div class="left-section">
-                <form id="stock-form">
-                    <label for="stock-symbol" class="bold-label">Stocks<span style="color: red;">*</span>:</label>
-                    <select id="stock-symbol" multiple="multiple" required class="js-example-basic-multiple">
-                        <option value="" disabled>Select Stock Symbols</option>
-                        <!-- Stock symbols will be populated dynamically -->
-                    </select>
+                <fieldset class="historical-data-section">
+                    <legend class="section-caption">Historical Data Analysis - Multiselect up to 3 stocks</legend>
+                    <form id="stock-form">
+                        <label for="stock-symbol" class="bold-label">Stocks<span style="color: red;">*</span>:</label>
+                        <select id="stock-symbol" multiple="multiple" required class="js-example-basic-multiple">
+                            <option value="" disabled>Select Stock Symbols</option>
+                            <!-- Stock symbols will be populated dynamically -->
+                        </select>
 
-                    <div class="date-submit-container">
-                        <div class="date-fields">
-                            <label for="from-date" class="bold-label">From Date<span style="color: red;">*</span>:</label>
-                            <input type="date" id="from-date" required>
-                            <label for="to-date" class="bold-label">To Date<span style="color: red;">*</span>:</label>
-                            <input type="date" id="to-date" required>
+                        <div class="date-submit-container">
+                            <div class="date-fields">
+                                <label for="from-date" class="bold-label">From Date<span style="color: red;">*</span>:</label>
+                                <input type="date" id="from-date" required>
+                                <label for="to-date" class="bold-label">To Date<span style="color: red;">*</span>:</label>
+                                <input type="date" id="to-date" required>
+                            </div>
+                            <input type="submit" value="Submit">
                         </div>
-                        <input type="submit" value="Submit">
+                    </form>
+                    <table id="stock-data">
+                        <thead>
+                            <tr>
+                                <th>Stock</th>
+                                <th>Date</th>
+                                <th>Open</th>
+                                <th>High</th>
+                                <th>Low</th>
+                                <th>Close</th>
+                                <th>Volume</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Stock data rows will be populated dynamically -->
+                        </tbody>
+                    </table>
+                    <div id="pagination-controls">
+                        <button id="prev-page" onclick="prevPage()">Previous</button>
+                        <span id="page-info"></span>
+                        <button id="next-page" onclick="nextPage()">Next</button>
                     </div>
-                </form>
-                <table id="stock-data">
-                    <thead>
-                        <tr>
-                            <th>Stock</th>
-                            <th>Date</th>
-                            <th>Open</th>
-                            <th>High</th>
-                            <th>Low</th>
-                            <th>Close</th>
-                            <th>Volume</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Stock data rows will be populated dynamically -->
-                    </tbody>
-                </table>
-                <div id="pagination-controls">
-                    <button id="prev-page" onclick="prevPage()">Previous</button>
-                    <span id="page-info"></span>
-                    <button id="next-page" onclick="nextPage()">Next</button>
-                </div>
-                <div id="chart-container">
-                    <!-- Chart will be displayed here -->
-                    <canvas id="stock-chart"></canvas>
-                </div>
+                    <div id="chart-container">
+                        <!-- Chart will be displayed here -->
+                        <canvas id="stock-chart"></canvas>
+                    </div>
+                </fieldset>
             </div>
             <div class="right-section">
                 <div id="news-section">

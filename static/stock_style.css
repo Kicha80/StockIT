@@ -202,153 +202,66 @@ canvas {
     margin-top: 20px;
     background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box### Continued `stock_style.css`:
+
+```css
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#top-performers-section {
-    padding: 20px;
-    width: calc(100% - 40px);
-    max-width: 600px;
-    margin-top: 20px;
-    background-color: #ffd699;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    color: white;
-    text-align: center;
-    font-size: 24px;
-    font-style: italic;
+#news-feed-container {
+    max-height: 200px; /* Adjust height as needed */
+    overflow: hidden;
+    position: relative;
 }
-
-/* Top performers dropdown styles */
-#top-performers-dropdown {
-    margin-bottom: 20px;
-    font-size: 14px;
-}
-
-/* Industry dropdown styles */
-#industry-dropdown {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-}
-
-/* Select2 container styles */
-.select2-container {
-    width: 100%;
-    max-width: 300px;
-}
-
-.select2-container--default .select2-selection--multiple {
-    width: 100%;
-    max-width: 300px;
-    background-color: #fff;
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    cursor: text;
-    padding: 5px;
-}
-
-.select2-container--default .select2-selection--multiple .select2-selection__rendered {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background-color: #4CAF50;
-    border: 1px solid #4CAF50;
-    border-radius: 2px;
-    color: purple;
-    margin: 2px;
-    padding: 2px 5px;
-    font-size: 13px;
-}
-
-.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    margin-right: 5px;
-}
-
-.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
-    background-color: #333;
-    color: white;
-}
-
-.select2-container--default .select2-selection--multiple .select2-search--inline {
-    float: left;
-    margin: 2px;
-    padding: 0;
-}
-
-.select2-container--default .select2-selection--multiple .select2-search__field {
-    border: none;
-    margin-top: 5px;
-    padding: 5px;
-}
-
-/* News Section Styles */
-#news-section {
-    padding: 20px;
-    width: 100%;
-    max-width: 100%;
-    margin-top: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* Ensure overflow is hidden to contain the scrolling */
-}
-
 
 #news-feed {
     list-style: none;
     padding: 0;
     margin: 0;
-    height: 190px; /* Fixed height to show 5 headlines at a time */
-    overflow: hidden; /* Hide overflow content initially */
+    animation: scroll 30s linear infinite; /* Adjust duration as needed */
 }
 
 #news-feed li {
-    margin-bottom: 0;
-}
-
-#news-feed li a {
-    display: block;
     padding: 10px;
-    text-decoration: underline;
-    font-size: 16px;
-    font-style: italic;
-    white-space: nowrap; /* Prevent wrapping of long headlines */
+    border-bottom: 1px solid #ddd;
 }
 
-
-#news-feed li:nth-child(odd) a {
-    color: #3366cc;
-}
-
-#news-feed li:nth-child(even) a {
-    color: #964B00;
-}
-
-#news-feed li:nth-child(3n) a {
-    color: #FF0000;
-}
-
-/* Styling for News Feed and Top Performers titles */
-#news-section h2,
-#top-performers-section h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    text-align: center;
-    font-family: 'Arial Black', sans-serif;
+#news-feed a {
+    text-decoration: none;
     color: #333;
-    text-shadow: 2px 2px 2px rgba(0,0,0,0.2);
 }
 
-/* Adjust margin-top for specific h2 */
-#news-section h2 {
-    margin-top: -35px; /* Adjust based on your requirement */
+#news-feed a:hover {
+    text-decoration: underline;
+}
+
+/* Top Performers Section */
+#top-performers-section {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#top-performers-dropdown {
+    margin-bottom: 20px;
+}
+
+#top-performers-chart-container {
+    text-align: center;
+}
+
+/* Select2 Styles */
+.select2-container {
+    width: 100% !important;
+}
+
+.select2-selection {
+    height: 38px !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 10px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 5px !important;
 }

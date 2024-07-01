@@ -34,7 +34,7 @@ def fetch_news_from_rss():
     feed_url = 'https://www.moneycontrol.com/rss/MCtopnews.xml'  # Example RSS feed URL
     feed = feedparser.parse(feed_url)
     news_items = []
-    for entry in feed.entries[:5]:  # Limit to the first 5 news items
+    for entry in feed.entries[:10]:  # Limit to the first 10 news items
         news_items.append({
             'title': entry.title,
             'link': entry.link

@@ -330,6 +330,8 @@ h2 {
     text-align: left;
 }
 
+
+
 #loading-message {
     display: none; /* Initially hidden */
     position: fixed;
@@ -351,4 +353,36 @@ h2 {
     border-radius: 5px;
     font-size: 14px;
     font-weight: bold;
+}
+
+.new-sections-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 2px;
+}
+
+.section-box {
+    width: 30%;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+}
+
+.section-title {
+    color: red;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.new-sections-container a {
+    color: blue;
+    text-decoration: none;
+}
+
+.new-sections-container a:hover {
+    text-decoration: underline;
 }

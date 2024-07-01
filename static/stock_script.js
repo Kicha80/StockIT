@@ -77,6 +77,29 @@ document.getElementById('industry-dropdown').addEventListener('change', function
 });
 
 
+
+// Function to start scrolling the news feed
+function startScrollingNewsFeed() {
+    const newsFeed = document.getElementById('news-feed');
+    let scrollPosition = 0;
+
+    function scrollNews() {
+        scrollPosition++;
+        newsFeed.style.transform = `translateY(-${scrollPosition}px)`;
+        if (scrollPosition >= newsFeed.scrollHeight - newsFeed.clientHeight) {
+            scrollPosition = 0;
+        }
+        requestAnimationFrame(scrollNews);
+    }
+
+    requestAnimationFrame(scrollNews);
+}
+
+// Start scrolling the news feed when the document is ready
+document.addEventListener('DOMContentLoaded', function() {
+    startScrollingNewsFeed();
+});
+
 function updateTopPerformersChart(data) {
     var topPerformersChart = document.getElementById('top-performers-chart').getContext('2d');
     if (window.topPerformersChartInstance) {

@@ -27,7 +27,7 @@ body {
     font-size: 28px; /* Reduced font size */
     margin: 0;
     text-decoration: underline;
-	padding-left: 600px; /* Adjust left padding */
+    padding-left: 600px; /* Adjust left padding */
     color: #ffcc00;
     font-style: italic;
     text-align: right; /* Center align the banner title */
@@ -38,10 +38,9 @@ body {
     color: #666;
     font-size: 14px; /* Reduced font size */
     animation: moveLeftRight 10s linear infinite;
-	padding-left: 200px; /* Adjust left padding */
+    padding-left: 400px; /* Adjust left padding */
     text-align: right; /* Align catch phrase to the left */
 }
-
 
 /* Animation for scrolling */
 @keyframes moveLeftRight {
@@ -58,17 +57,20 @@ body {
     display: flex;
     width: 100%;
     max-width: 1200px;
-    margin-top: 20px;
+    margin-top: 80px; /* Pushed down by additional 5 lines */
+    margin-left: 0; /* Align with the left margin */
 }
 
 .left-section {
     width: 70%;
-    padding: 0 20px;
+    padding: 0;
+    margin-top: 0; /* No gap between sections */
 }
 
 .right-section {
     width: 30%;
-    padding: 0 20px;
+    padding: 0;
+    margin-top: 0; /* No gap between sections */
 }
 
 .form-group {
@@ -88,7 +90,7 @@ label[for="stock-symbol"] {
     width: 90px; /* Adjusted width */
     text-align: left;
     font-size: 14px; /* Reduced font size */
-	margin-right: 2px; /* Adjusted margin */
+    margin-right: 2px; /* Adjusted margin */
 }
 
 input[type="date"], select.js-example-basic-multiple {
@@ -151,7 +153,6 @@ th {
     padding: 20px;
     width: 100%;
     max-width: 100%;
-    margin-top: 64px;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -174,20 +175,38 @@ th {
     padding: 8px;
     border-bottom: 1px solid #ddd;
     font-size: 14px; /* Reduced font size */
+    font-weight: bold;
+}
+
+#news-feed li:nth-child(odd) a {
+    color: red; /* Red color for odd headlines */
+}
+
+#news-feed li:nth-child(even) a {
+    color: blue; /* Blue color for even headlines */
 }
 
 #news-feed a {
     text-decoration: none;
-    color: #333;
 }
 
 #news-feed a:hover {
     text-decoration: underline;
 }
 
+/* Add the scroll animation */
+@keyframes scroll {
+    0% {
+        transform: translateY(0); /* Start from the top */
+    }
+    100% {
+        transform: translateY(-100%); /* Move up by the height of the content */
+    }
+}
+
 /* Top Performers Section */
 #top-performers-section {
-    margin-top: 20px;
+    margin-top: 2px; /* Adjusted margin */
     padding: 20px;
     background-color: #ffffff;
     border-radius: 10px;
@@ -300,7 +319,7 @@ h2 {
 .historical-data-section {
     border: 2px solid #000;
     padding: 20px;
-    margin-top: 40px;
+    margin-top: 0; /* No gap between sections */
     text-align: left;
 }
 
@@ -321,3 +340,4 @@ h2 {
     padding: 10px;
     z-index: 1000; /* Ensure it's above other content */
 }
+

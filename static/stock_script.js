@@ -81,12 +81,16 @@ document.getElementById('industry-dropdown').addEventListener('change', function
 // Function to start scrolling the news feed
 function startScrollingNewsFeed() {
     const newsFeed = document.getElementById('news-feed');
+    const originalContent = newsFeed.innerHTML;
+    newsFeed.innerHTML += originalContent; // Duplicate the content
+
     let scrollPosition = 0;
+    const totalHeight = newsFeed.scrollHeight *.95; // Half of the duplicated content
 
     function scrollNews() {
         scrollPosition++;
         newsFeed.style.transform = `translateY(-${scrollPosition}px)`;
-        if (scrollPosition >= newsFeed.scrollHeight - newsFeed.clientHeight) {
+        if (scrollPosition >= totalHeight) { // Reset when half the content has scrolled
             scrollPosition = 0;
         }
         requestAnimationFrame(scrollNews);

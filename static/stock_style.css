@@ -168,7 +168,8 @@ th {
     list-style: none;
     padding: 0;
     margin: 0;
-    animation: scroll 30s linear infinite; /* Adjust duration as needed */
+    animation: scroll 5s linear infinite; /* Adjust duration */
+
 }
 
 #news-feed li {
@@ -197,10 +198,10 @@ th {
 /* Add the scroll animation */
 @keyframes scroll {
     0% {
-        transform: translateY(0); /* Start from the top */
+        transform: translateY(0);
     }
     100% {
-        transform: translateY(-100%); /* Move up by the height of the content */
+        transform: translateY(-50%); /* Scroll through half of the duplicated content */
     }
 }
 

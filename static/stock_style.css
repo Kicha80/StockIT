@@ -93,13 +93,22 @@ label[for="stock-symbol"] {
     margin-right: 2px; /* Adjusted margin */
 }
 
-input[type="date"], select.js-example-basic-multiple {
+input[type="date"] {
     padding: 8px;
     font-size: 14px; /* Reduced font size */
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-right: 8px; /* Reduced margin */
     width: 120px; /* Reduced width */
+}
+
+#stock-symbol {
+    padding: 8px;
+    font-size: 14px; /* Reduced font size */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 8px; /* Reduced margin */
+    width: 250px; /* Increased width */
 }
 
 input[type="submit"] {
@@ -148,15 +157,24 @@ th {
     margin: 0 4px; /* Reduced margin */
 }
 
-/* News Section Styles */
 #news-section {
-    padding: 20px;
-    width: 100%;
-    max-width: 100%;
+    margin-top: 20px; /* Add margin-top to separate from "Useful Stock Screens" */
+    width: 100%; /* Ensure the news section takes full width */
+    max-width: 300px; /* Limit the width of the news section */
+    padding: 0px; /* Add padding */
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	align-items: center; /* Align items vertically */
 }
+
+#news-section .fancy-title {
+    font-size: 16px; /* Increased font size */
+    padding-bottom: 10px; /* Increased padding */
+	align-items: center; /* Align items vertically */
+}
+
+
 
 #news-feed-container {
     max-height: 200px; /* Adjust height as needed */
@@ -204,14 +222,21 @@ th {
         transform: translateY(-50%); /* Scroll through half of the duplicated content */
     }
 }
-/* Top Performers Section */
 #top-performers-section {
-    margin-top: 2px; /* Adjusted margin */
-    padding: 20px;
+    margin-top: 20px; /* Add margin-top to separate from the news section */
+    width: 100%; /* Ensure the top performers section takes full width */
+    max-width: 300px; /* Limit the width of the top performers section */
+    padding: 0px; /* Add padding */
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
+}
+
+#top-performers-section .fancy-title {
+    font-size: 16px; /* Increased font size */
+    padding-bottom: 10px; /* Increased padding */
+    text-align: center; /* Center align the title */
+    margin-top: 10px; /* Add margin above the title */
 }
 
 #top-performers-dropdown {
@@ -359,23 +384,39 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-bottom: 2px;
+    margin-bottom: 10px;
 }
 
 .section-box {
-    width: 30%;
-    background-color: #ffffff;
-    padding: 10px;
+    flex: 1 1 calc(45% - 20px); /* Adjust width to fit sections neatly */
+    background-color: #f5f5dc; /* Light brown background */
+    padding: 10px; /* Increased padding */
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border: 1px solid #ddd;
 }
 
 .section-title {
     color: red;
-    font-size: 16px;
+    font-size: 14px; /* Increased font size */
+    margin-bottom: 5px;
+}
+
+.useful-stock-screens {
+    border: 1px solid #ddd;
+    padding: 10px;
     margin-bottom: 10px;
+    font-size: 14px; /* Increased font size */
+    background-color: #f5f5dc; /* Light brown background */
+    text-align: left; /* Align text to the left */
+}
+
+.useful-stock-screens legend {
+    font-size: 16px; /* Increased font size */
+    color: red;
+    font-weight: bold;
+    text-decoration: underline; /* Underline the caption */
 }
 
 .new-sections-container a {
@@ -385,4 +426,30 @@ h2 {
 
 .new-sections-container a:hover {
     text-decoration: underline;
+}
+
+.right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align to the right */
+    margin-top: 0; /* Remove top margin */
+    width: 100%; /* Ensure the right section takes full width */
+    max-width: 300px; /* Limit the width of the right section */
+}
+
+#news-section {
+    margin-top: 20px; /* Add margin-top to separate from "Useful Stock Screens" */
+    width: 100%; /* Ensure the news section takes full width */
+    max-width: 300px; /* Limit the width of the news section */
+    padding: 0px; /* Add padding */
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#news-section .fancy-title {
+    font-size: 16px; /* Increased font size */
+    padding-bottom: 10px; /* Increased padding */
+    text-align: center; /* Center align the title */
+    margin-top: 10px; /* Add margin above the title */
 }

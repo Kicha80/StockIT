@@ -102,7 +102,22 @@ function startScrollingNewsFeed() {
 // Start scrolling the news feed when the document is ready
 document.addEventListener('DOMContentLoaded', function() {
     startScrollingNewsFeed();
+    fetchNewsHeadlines(); // Fetch headlines initially
+    setInterval(fetchNewsHeadlines, 3600000); // Refresh headlines every hour (3600000 ms)
 });
+function updateTime() {
+    const now = new Date();
+    const hours = now.getUTCHours().toString().padStart(2, '0');
+    const minutes = now.getUTCMinutes().toString().padStart(2, '0');
+    const seconds = now.getUTCSeconds().toString().padStart(2, '0');
+    document.getElementById('time').textContent = `Time: ${hours}:${minutes}:${seconds} GMT`;
+}
+
+// Update time every second
+setInterval(updateTime, 1000);
+
+// Initialize the time immediately
+updateTime();
 
 function updateTopPerformersChart(data) {
     var topPerformersChart = document.getElementById('top-performers-chart').getContext('2d');

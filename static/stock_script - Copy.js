@@ -76,8 +76,6 @@ document.getElementById('industry-dropdown').addEventListener('change', function
         });
 });
 
-
-
 // Function to start scrolling the news feed
 function startScrollingNewsFeed() {
     const newsFeed = document.getElementById('news-feed');
@@ -99,12 +97,55 @@ function startScrollingNewsFeed() {
     requestAnimationFrame(scrollNews);
 }
 
-// Start scrolling the news feed when the document is ready
-document.addEventListener('DOMContentLoaded', function() {
-    startScrollingNewsFeed();
+// Fetch news headlines and update the feed
+function fetchNewsHeadlines() {
+    fetch('/get_news_headlines')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Fetched news headlines:', data);  // Debugging output
+            updateNewsFeed(data);
+        })
+        .catch(error => {
+            console.error('Error fetching news headlines:', error);
+            alert('Error fetching news headlines. Please try again.');
+        });
+}
+
+// Update the news feed with fetched headlines
+function updateNewsFeed(articles) {
+    const newsFeed = document.getElementById('news-feed');
+    console.log('Updating news feed with articles:', articles);  // Debugging output
+    newsFeed.innerHTML = '';
+
+    if (articles.length > 0) {
+        articles.forEach(article => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = article.link;
+            a.textContent = article.title;
+            li.appendChild(a);
+            newsFeed.appendChild(li);
+        });
+        console.log('News feed updated successfully.');
+    } else {
+        newsFeed.innerHTML = '<li>No news available</li>';
+        console.log('No news available.');
+    }
+}
+
+// Initialize Select2 for the stock-symbol dropdown
+$(document).ready(function() {
+    $('#stock-symbol').select2({
+        placeholder: "Select Stock Symbols",
+        width: '100%'
+    });
     fetchNewsHeadlines(); // Fetch headlines initially
-    setInterval(fetchNewsHeadlines, 3600000); // Refresh headlines every hour (3600000 ms)
+    startScrollingNewsFeed(); // Start scrolling news feed
 });
+
+// Fetch news headlines every hour
+setInterval(fetchNewsHeadlines, 3600000); // Refresh headlines every hour (3600000 ms)
+
 function updateTime() {
     const now = new Date();
     const hours = now.getUTCHours().toString().padStart(2, '0');
@@ -177,8 +218,6 @@ fetch('/get_industries')
         alert('Error fetching industries. Please try again.');
     });
 
-fetchNewsHeadlines();
-
 function fetchStockData(stockSymbol, fromDate, toDate) {
     var apiKey = 'IL8BY1S1UKLFM8AO';
     var apiUrl = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + stockSymbol + '&apikey=' + apiKey + '&outputsize=full';
@@ -229,22 +268,22 @@ function formatDecimal(number) {
 }
 
 function updateStockDataTable(stockDataArray, fromDate, toDate) {
-    var tableBody = document.getElementById('stock-data').getElementsByTagName('tbody')[0];
+    const tableBody = document.getElementById('stock-data').getElementsByTagName('tbody')[0];
     tableBody.innerHTML = '';
 
-    var fromDateObj = new Date(fromDate);
-    var toDateObj = new Date(toDate);
-    var rowsAdded = 0;
+    const fromDateObj = new Date(fromDate);
+    const toDateObj = new Date(toDate);
+    let rowsAdded = 0;
 
     stockDataArray.forEach(stockData => {
-        var stockSymbol = stockData.stockSymbol.split('.')[0];
-        var timeSeries = stockData.timeSeries;
+        const stockSymbol = stockData.stockSymbol.split('.')[0];
+        const timeSeries = stockData.timeSeries;
 
-        for (var date in timeSeries) {
-            var dateObj = new Date(date);
+        for (const date in timeSeries) {
+            const dateObj = new Date(date);
             if (dateObj >= fromDateObj && dateObj <= toDateObj) {
                 if (rowsAdded >= (currentPage - 1) * rowsPerPage && rowsAdded < currentPage * rowsPerPage) {
-                    var row = tableBody.insertRow();
+                    const row = tableBody.insertRow();
                     row.insertCell(0).textContent = stockSymbol;
                     row.insertCell(1).textContent = date;
                     row.insertCell(2).textContent = formatDecimal(timeSeries[date]['1. open']);
@@ -344,7 +383,18 @@ function getBorderColor(index) {
 function updatePaginationControls() {
     document.getElementById('page-info').textContent = 'Page ' + currentPage;
     document.getElementById('prev-page').disabled = currentPage === 1;
-    document.getElementById('next-page').disabled = stockDataArray[0].timeSeries ? Object.keys(stockDataArray[0].timeSeries).length <= currentPage * rowsPerPage : true;
+    document.getElementById('next-page').disabled = currentPage >= Math.ceil(getTotalRows() / rowsPerPage);
+}
+
+function getTotalRows() {
+    return stockDataArray.reduce((total, stockData) => {
+        const fromDateObj = new Date(document.getElementById('from-date').value);
+        const toDateObj = new Date(document.getElementById('to-date').value);
+        return total + Object.keys(stockData.timeSeries).filter(date => {
+            const dateObj = new Date(date);
+            return dateObj >= fromDateObj && dateObj <= toDateObj;
+        }).length;
+    }, 0);
 }
 
 function prevPage() {
@@ -356,73 +406,9 @@ function prevPage() {
 }
 
 function nextPage() {
-    var totalRows = stockDataArray.reduce(function(total, stockData) {
-        var timeSeries = stockData.timeSeries;
-        var fromDateObj = new Date(document.getElementById('from-date').value);
-        var toDateObj = new Date(document.getElementById('to-date').value);
-        var rows = 0;
-        for (var date in timeSeries) {
-            var dateObj = newDate(date);
-            if (dateObj >= fromDateObj && dateObj <= toDateObj) {
-                rows++;
-            }
-        }
-        return total + rows;
-    }, 0);
-
-    if (currentPage < Math.ceil(totalRows / rowsPerPage)) {
+    if (currentPage < Math.ceil(getTotalRows() / rowsPerPage)) {
         currentPage++;
         updateStockDataTable(stockDataArray, document.getElementById('from-date').value, document.getElementById('to-date').value);
         updatePaginationControls();
     }
 }
-
-function fetchNewsHeadlines() {
-    fetch('/get_news_headlines')
-        .then(response => response.json())
-        .then(data => {
-            updateNewsFeed(data);
-        })
-        .catch(error => {
-            console.error('Error fetching news headlines:', error);
-            alert('Error fetching news headlines. Please try again.');
-        });
-}
-
-function updateNewsFeed(articles) {
-    const newsFeed = document.getElementById('news-feed');
-    newsFeed.innerHTML = '';
-
-    if (articles.length > 0) {
-        articles.forEach(article => {
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.href = article.link;
-            a.textContent = article.title;
-            li.appendChild(a);
-            newsFeed.appendChild(li);
-        });
-    } else {
-        newsFeed.innerHTML = '<li>No news available</li>';
-    }
-}
-// Initialize Select2 for the stock-symbol dropdown
-$(document).ready(function() {
-    $('#stock-symbol').select2({
-        placeholder: "Select Stock Symbols",
-        width: '100%'
-    });
-});
-function updateTime() {
-    const now = new Date();
-    const hours = now.getUTCHours().toString().padStart(2, '0');
-    const minutes = now.getUTCMinutes().toString().padStart(2, '0');
-    const seconds = now.getUTCSeconds().toString().padStart(2, '0');
-    document.getElementById('time').textContent = `Time: ${hours}:${minutes}:${seconds} GMT`;
-}
-
-// Update time every second
-setInterval(updateTime, 1000);
-
-// Initialize the time immediately
-updateTime();

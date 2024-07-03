@@ -51,7 +51,7 @@ def fetch_news_from_rss():
     if datetime.now() - last_reset_time > timedelta(hours=24):
         previous_articles.clear()
         last_reset_time = datetime.now()
-        app.logger.debug("Reset previous_articles set")
+        app.logger.debug("Reset previous_articles sett")
 
     return fetch_rss_feed(feed_url)
 

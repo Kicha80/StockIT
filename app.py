@@ -28,7 +28,7 @@ def load_industries():
         app.logger.error(f"Error loading industries: {str(e)}")
         return []
 
-# A set to store previously fetched article links
+# A set to store previously fetched article links - to check for old headlines
 previous_articles = set()
 last_reset_time = datetime.now()
 

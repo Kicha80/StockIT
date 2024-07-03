@@ -76,6 +76,8 @@ document.getElementById('industry-dropdown').addEventListener('change', function
         });
 });
 
+
+
 // Function to start scrolling the news feed
 function startScrollingNewsFeed() {
     const newsFeed = document.getElementById('news-feed');
@@ -97,55 +99,12 @@ function startScrollingNewsFeed() {
     requestAnimationFrame(scrollNews);
 }
 
-// Fetch news headlines and update the feed
-function fetchNewsHeadlines() {
-    fetch('/get_news_headlines')
-        .then(response => response.json())
-        .then(data => {
-            console.log('Fetched news headlines:', data);  // Debugging output
-            updateNewsFeed(data);
-        })
-        .catch(error => {
-            console.error('Error fetching news headlines:', error);
-            alert('Error fetching news headlines. Please try again.');
-        });
-}
-
-// Update the news feed with fetched headlines
-function updateNewsFeed(articles) {
-    const newsFeed = document.getElementById('news-feed');
-    console.log('Updating news feed with articles:', articles);  // Debugging output
-    newsFeed.innerHTML = '';
-
-    if (articles.length > 0) {
-        articles.forEach(article => {
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.href = article.link;
-            a.textContent = article.title;
-            li.appendChild(a);
-            newsFeed.appendChild(li);
-        });
-        console.log('News feed updated successfully.');
-    } else {
-        newsFeed.innerHTML = '<li>No news available</li>';
-        console.log('No news available.');
-    }
-}
-
-// Initialize Select2 for the stock-symbol dropdown
-$(document).ready(function() {
-    $('#stock-symbol').select2({
-        placeholder: "Select Stock Symbols",
-        width: '100%'
-    });
+// Start scrolling the news feed when the document is ready
+document.addEventListener('DOMContentLoaded', function() {
+    startScrollingNewsFeed();
     fetchNewsHeadlines(); // Fetch headlines initially
-    startScrollingNewsFeed(); // Start scrolling news feed
+    setInterval(fetchNewsHeadlines, 3600000); // Refresh headlines every hour (3600000 ms)
 });
-
-// Fetch news headlines every hour
-setInterval(fetchNewsHeadlines, 3600000); // Refresh headlines every hour (3600000 ms)
-
 function updateTime() {
     const now = new Date();
     const hours = now.getUTCHours().toString().padStart(2, '0');
@@ -217,6 +176,8 @@ fetch('/get_industries')
         console.error('Error fetching industries:', error);
         alert('Error fetching industries. Please try again.');
     });
+
+fetchNewsHeadlines();
 
 function fetchStockData(stockSymbol, fromDate, toDate) {
     var apiKey = 'IL8BY1S1UKLFM8AO';
@@ -412,3 +373,52 @@ function nextPage() {
         updatePaginationControls();
     }
 }
+function fetchNewsHeadlines() {
+    fetch('/get_news_headlines')
+        .then(response => response.json())
+        .then(data => {
+            updateNewsFeed(data);
+        })
+        .catch(error => {
+            console.error('Error fetching news headlines:', error);
+            alert('Error fetching news headlines. Please try again.');
+        });
+}
+
+function updateNewsFeed(articles) {
+    const newsFeed = document.getElementById('news-feed');
+    newsFeed.innerHTML = '';
+
+    if (articles.length > 0) {
+        articles.forEach(article => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = article.link;
+            a.textContent = article.title;
+            li.appendChild(a);
+            newsFeed.appendChild(li);
+        });
+    } else {
+        newsFeed.innerHTML = '<li>No news available</li>';
+    }
+}
+// Initialize Select2 for the stock-symbol dropdown
+$(document).ready(function() {
+    $('#stock-symbol').select2({
+        placeholder: "Select Stock Symbols",
+        width: '100%'
+    });
+});
+function updateTime() {
+    const now = new Date();
+    const hours = now.getUTCHours().toString().padStart(2, '0');
+    const minutes = now.getUTCMinutes().toString().padStart(2, '0');
+    const seconds = now.getUTCSeconds().toString().padStart(2, '0');
+    document.getElementById('time').textContent = `Time: ${hours}:${minutes}:${seconds} GMT`;
+}
+
+// Update time every second
+setInterval(updateTime, 1000);
+
+// Initialize the time immediately
+updateTime();

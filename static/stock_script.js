@@ -2,6 +2,8 @@ let currentPage = 1;
 const rowsPerPage = 10;
 let stockDataArray = [];
 let chartInstance;
+let newsHeadlines = [];
+let currentHeadlineIndex = 0;
 
 document.getElementById('stock-form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -97,13 +99,24 @@ function startScrollingNewsFeed() {
     requestAnimationFrame(scrollNews);
 }
 
-// Fetch news headlines and update the feed
+// Start scrolling the news feed when the document is ready
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Document loaded');
+    fetchNewsHeadlines(); // Fetch headlines initially
+    setInterval(fetchNewsHeadlines, 3600000); // Refresh headlines every hour (3600000 ms)
+    startScrollingNewsFeed();
+});
+
 function fetchNewsHeadlines() {
+    console.log('Fetching news headlines...');
     fetch('/get_news_headlines')
         .then(response => response.json())
         .then(data => {
             console.log('Fetched news headlines:', data);  // Debugging output
-            updateNewsFeed(data);
+            newsHeadlines = data;
+            currentHeadlineIndex = 0;
+            updateNewsFeed(newsHeadlines);
+            rotateHeadlines();
         })
         .catch(error => {
             console.error('Error fetching news headlines:', error);
@@ -111,14 +124,13 @@ function fetchNewsHeadlines() {
         });
 }
 
-// Update the news feed with fetched headlines
 function updateNewsFeed(articles) {
     const newsFeed = document.getElementById('news-feed');
-    console.log('Updating news feed with articles:', articles);  // Debugging output
     newsFeed.innerHTML = '';
 
     if (articles.length > 0) {
         articles.forEach(article => {
+            console.log('Adding article:', article);  // Debugging output
             const li = document.createElement('li');
             const a = document.createElement('a');
             a.href = article.link;
@@ -133,18 +145,25 @@ function updateNewsFeed(articles) {
     }
 }
 
-// Initialize Select2 for the stock-symbol dropdown
-$(document).ready(function() {
-    $('#stock-symbol').select2({
-        placeholder: "Select Stock Symbols",
-        width: '100%'
-    });
-    fetchNewsHeadlines(); // Fetch headlines initially
-    startScrollingNewsFeed(); // Start scrolling news feed
-});
+function rotateHeadlines() {
+    const newsFeed = document.getElementById('news-feed');
+    setInterval(() => {
+        if (newsHeadlines.length > 0) {
+            currentHeadlineIndex = (currentHeadlineIndex + 1) % newsHeadlines.length;
+            console.log('Current headline index:', currentHeadlineIndex);
+            newsFeed.innerHTML = '';
 
-// Fetch news headlines every hour
-setInterval(fetchNewsHeadlines, 3600000); // Refresh headlines every hour (3600000 ms)
+            const article = newsHeadlines[currentHeadlineIndex];
+            console.log('Rotating to article:', article);  // Debugging output
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = article.link;
+            a.textContent = article.title;
+            li.appendChild(a);
+            newsFeed.appendChild(li);
+        }
+    }, 5000); // Change headline every 5 seconds
+}
 
 function updateTime() {
     const now = new Date();

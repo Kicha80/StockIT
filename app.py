@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 def load_stock_symbols():
     try:
-        df = pd.read_excel('stock_names.xlsx')
+        df = pd.read_excel(os.path.join(os.getcwd(), 'stock_names.xlsx'))
         return df['Stock'].tolist()
     except Exception as e:
         app.logger.error(f"Error loading stock symbols: {str(e)}")
@@ -21,7 +21,7 @@ def load_stock_symbols():
 
 def load_industries():
     try:
-        df = pd.read_excel('Stocks_top_Perf.xlsx')
+        df = pd.read_excel(os.path.join(os.getcwd(), 'Stocks_top_Perf.xlsx'))
         industries = df['Industry'].dropna().unique().tolist()
         return industries
     except Exception as e:
@@ -49,9 +49,9 @@ def fetch_news_from_rss():
     
     # Reset previous_articles set every 24 hours to ensure fresh headlines
     if datetime.now() - last_reset_time > timedelta(hours=24):
-        previous_articles.clear()
+        # previous_articles.clear()
         last_reset_time = datetime.now()
-        app.logger.debug("Reset previous_articles sett")
+        app.logger.debug("Reset previous_articles set")
 
     return fetch_rss_feed(feed_url)
 
@@ -78,7 +78,7 @@ def get_top_performers():
     if not industry:
         return jsonify({'error': 'Industry not specified'}), 400
 
-    excel_file_path = 'Stocks_top_Perf.xlsx'
+    excel_file_path = os.path.join(os.getcwd(), 'Stocks_top_Perf.xlsx')
     app.logger.info(f"Attempting to read Excel file from path: {os.path.abspath(excel_file_path)}")
 
     try:

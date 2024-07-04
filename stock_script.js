@@ -81,16 +81,12 @@ document.getElementById('industry-dropdown').addEventListener('change', function
 // Function to start scrolling the news feed
 function startScrollingNewsFeed() {
     const newsFeed = document.getElementById('news-feed');
-    const originalContent = newsFeed.innerHTML;
-    newsFeed.innerHTML += originalContent; // Duplicate the content
-
     let scrollPosition = 0;
-    const totalHeight = newsFeed.scrollHeight / 2; // Use half of the duplicated content's height
 
     function scrollNews() {
         scrollPosition++;
         newsFeed.style.transform = `translateY(-${scrollPosition}px)`;
-        if (scrollPosition >= totalHeight) { // Reset when half the content has scrolled
+        if (scrollPosition >= newsFeed.scrollHeight - newsFeed.clientHeight) {
             scrollPosition = 0;
         }
         requestAnimationFrame(scrollNews);
@@ -398,16 +394,3 @@ $(document).ready(function() {
         width: '100%'
     });
 });
-function updateTime() {
-    const now = new Date();
-    const hours = now.getUTCHours().toString().padStart(2, '0');
-    const minutes = now.getUTCMinutes().toString().padStart(2, '0');
-    const seconds = now.getUTCSeconds().toString().padStart(2, '0');
-    document.getElementById('time').textContent = `Time: ${hours}:${minutes}:${seconds} GMT`;
-}
-
-// Update time every second
-setInterval(updateTime, 1000);
-
-// Initialize the time immediately
-updateTime();

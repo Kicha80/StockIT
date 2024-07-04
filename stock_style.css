@@ -164,7 +164,12 @@ th {
     position: relative;
 }
 
-
+#news-feed {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    animation: scroll 30s linear infinite; /* Adjust duration as needed */
+}
 
 #news-feed li {
     padding: 8px;
@@ -189,21 +194,16 @@ th {
     text-decoration: underline;
 }
 
-#news-feed {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    animation: scroll 7s linear infinite; /* Adjust duration as needed */
-}
-
+/* Add the scroll animation */
 @keyframes scroll {
     0% {
-        transform: translateY(0);
+        transform: translateY(0); /* Start from the top */
     }
     100% {
-        transform: translateY(-50%); /* Scroll through half of the duplicated content */
+        transform: translateY(-100%); /* Move up by the height of the content */
     }
 }
+
 /* Top Performers Section */
 #top-performers-section {
     margin-top: 2px; /* Adjusted margin */
@@ -330,8 +330,6 @@ h2 {
     text-align: left;
 }
 
-
-
 #loading-message {
     display: none; /* Initially hidden */
     position: fixed;
@@ -343,46 +341,3 @@ h2 {
     z-index: 1000; /* Ensure it's above other content */
 }
 
-.time-container {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.new-sections-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 2px;
-}
-
-.section-box {
-    width: 30%;
-    background-color: #ffffff;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-}
-
-.section-title {
-    color: red;
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.new-sections-container a {
-    color: blue;
-    text-decoration: none;
-}
-
-.new-sections-container a:hover {
-    text-decoration: underline;
-}

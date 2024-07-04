@@ -9,39 +9,40 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding-left: 20px;
-    padding-right: 20px;
+    align-items: flex-start; /* Align contents to the left */
+    padding-left: 20px; /* Adjust left padding */
+    padding-right: 20px; /* Adjust right padding */
 }
 
 .banner {
     background-color: purple;
     color: white;
-    text-align: center;
-    padding-left: 20px;
+    text-align: center; /* Center align for banner */
+    padding-left: 20px; /* Adjust left padding */
     margin-bottom: 20px;
     width: 100%;
 }
 
 .banner-title {
-    font-size: 28px;
+    font-size: 28px; /* Reduced font size */
     margin: 0;
     text-decoration: underline;
-    padding-left: 600px;
+    padding-left: 600px; /* Adjust left padding */
     color: #ffcc00;
     font-style: italic;
-    text-align: right;
+    text-align: right; /* Center align the banner title */
 }
 
 .catch-phrase {
     font-style: italic;
     color: #666;
-    font-size: 14px;
+    font-size: 14px; /* Reduced font size */
     animation: moveLeftRight 10s linear infinite;
-    padding-left: 400px;
-    text-align: right;
+    padding-left: 400px; /* Adjust left padding */
+    text-align: right; /* Align catch phrase to the left */
 }
 
+/* Animation for scrolling */
 @keyframes moveLeftRight {
     0% {
         transform: translateX(-100%);
@@ -51,102 +52,105 @@ body {
     }
 }
 
+/* Content container and form */
 .content-container {
     display: flex;
     width: 100%;
     max-width: 1200px;
-    margin-top: 80px;
-    margin-left: 0;
+    margin-top: 80px; /* Pushed down by additional 5 lines */
+    margin-left: 0; /* Align with the left margin */
 }
 
 .left-section {
     width: 70%;
     padding: 0;
-    margin-top: 10;
+    margin-top: 0; /* No gap between sections */
 }
 
 .right-section {
-    width: 40%;
-    padding: 10px;
-    box-sizing: border-box;
-    margin-right: 5px; /* Adjust the value as needed */
-	margin-top: 1px;
+    width: 30%;
+    padding: 0;
+    margin-top: 0; /* No gap between sections */
 }
 
 .form-group {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Reduced margin */
 }
 
 .bold-label {
     font-weight: bold;
-    margin-right: 10px;
-    font-size: 14px;
+    margin-right: 10px; /* Reduced margin */
+    font-size: 14px; /* Reduced font size */
 }
 
 label[for="stock-symbol"] {
     display: inline-block;
-    width: 90px;
+    width: 90px; /* Adjusted width */
     text-align: left;
-    font-size: 14px;
-    margin-right: 2px;
+    font-size: 14px; /* Reduced font size */
+    margin-right: 2px; /* Adjusted margin */
 }
 
 input[type="date"], select.js-example-basic-multiple {
     padding: 8px;
-    font-size: 14px;
+    font-size: 14px; /* Reduced font size */
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-right: 8px;
-    width: 120px;
+    margin-right: 8px; /* Reduced margin */
+    width: 120px; /* Reduced width */
 }
 
 input[type="submit"] {
-    background-color: #FF6347;
+    background-color: #FF6347; /* Red */
     color: white;
     border: none;
     cursor: pointer;
-    padding: 8px 12px;
-    font-size: 14px;
+    padding: 8px 12px; /* Adjusted padding */
+    font-size: 14px; /* Reduced font size */
 }
 
+/* Table styles */
 table {
-    width: calc(100% - 20px);
+    width: calc(100% - 20px); /* Shrink table width */
     border-collapse: collapse;
     margin-top: 20px;
-    margin-right: 10px;
+    margin-right: 10px; /* Adjusted margin */
 }
 
-th, td {
+th,
+td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
-    font-size: 14px;
+    font-size: 14px; /* Reduced font size */
 }
 
 th {
-    background-color: #FF6347;
+    background-color: #FF6347; /* Red */
     color: white;
-    font-size: 14px;
+    font-size: 14px; /* Reduced font size */
 }
 
+/* Pagination controls styles */
 #pagination-controls {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    justify-content: flex-end; /* Align pagination controls to the right */
+    align-items: center; /* Align items vertically */
     margin-top: 20px;
-    margin-right: 10px;
+    margin-right: 10px; /* Adjusted margin */
 }
 
 #pagination-controls button {
-    padding: 6px 12px;
-    font-size: 14px;
-    margin: 0 4px;
-    background-color: #FF6347;
-    color: white;
+    padding: 6px 12px; /* Adjusted padding */
+    font-size: 14px; /* Reduced font size */
+    margin: 0 4px; /* Reduced margin */
+	background-color: #FF6347; /* Red */
+	color: white;
 }
 
+/* News Section Styles */
 #news-section {
     padding: 20px;
     width: 100%;
@@ -157,24 +161,26 @@ th {
 }
 
 #news-feed-container {
-    max-height: 200px;
+    max-height: 200px; /* Adjust height as needed */
     overflow: hidden;
     position: relative;
 }
 
+
+
 #news-feed li {
     padding: 8px;
     border-bottom: 1px solid #ddd;
-    font-size: 14px;
+    font-size: 14px; /* Reduced font size */
     font-weight: bold;
 }
 
 #news-feed li:nth-child(odd) a {
-    color: red;
+    color: red; /* Red color for odd headlines */
 }
 
 #news-feed li:nth-child(even) a {
-    color: blue;
+    color: blue; /* Blue color for even headlines */
 }
 
 #news-feed a {
@@ -189,7 +195,7 @@ th {
     list-style: none;
     padding: 0;
     margin: 0;
-    animation: scroll 7s linear infinite;
+    animation: scroll 7s linear infinite; /* Adjust duration as needed */
 }
 
 @keyframes scroll {
@@ -197,12 +203,12 @@ th {
         transform: translateY(0);
     }
     100% {
-        transform: translateY(-50%);
+        transform: translateY(-50%); /* Scroll through half of the duplicated content */
     }
 }
-
+/* Top Performers Section */
 #top-performers-section {
-    margin-top: 2px;
+    margin-top: 2px; /* Adjusted margin */
     padding: 20px;
     background-color: #ffffff;
     border-radius: 10px;
@@ -219,38 +225,40 @@ th {
 }
 
 #top-performers-dropdown label {
-    font-size: 16px;
+    font-size: 16px; /* Adjusted font size */
     color: blue;
 }
 
+/* Section title styles */
 .fancy-title {
     color: red;
     text-decoration: underline;
-    padding-bottom: 8px;
+    padding-bottom: 8px; /* Reduced padding */
     border-bottom: 2px solid red;
     margin-top: 0;
-    font-size: 18px;
+    font-size: 18px; /* Adjusted font size */
 }
 
 h2 {
     color: red;
-    font-size: 18px;
+    font-size: 18px; /* Adjusted font size */
 }
 
+/* Adjusting the appearance of the Select2 multi-select */
 .select2-container--default .select2-selection--multiple {
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
     cursor: text;
-    height: 40px;
+    height: 40px; /* Adjust to match the date fields */
     display: flex;
     align-items: center;
     padding: 5px;
-    width: 250px;
+    width: 250px; /* Adjust width to be slightly broader than date fields */
 }
 
 .select2-container {
-    width: 250px !important;
+    width: 250px !important; /* Ensure the Select2 container respects the width */
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__rendered {
@@ -289,6 +297,7 @@ h2 {
     width: auto !important;
 }
 
+/* Menu bar with five titles */
 .menu-bar {
     background-color: brown;
     display: flex;
@@ -301,36 +310,39 @@ h2 {
 }
 
 .menu-title {
-    font-size: 14px;
+    font-size: 14px; /* Reduced font size */
     color: white;
     font-weight: bold;
     flex: 1;
     text-align: center;
 }
 
+/* New styles for the historical data section */
 .historical-data-section {
     border: 2px solid #000;
     padding: 20px;
-    margin-top: 0;
+    margin-top: 0; /* No gap between sections */
     text-align: left;
 }
 
 .section-caption {
-    font-size: 16px;
+    font-size: 16px; /* Adjusted font size */
     font-weight: bold;
     margin-bottom: 20px;
     text-align: left;
 }
 
+
+
 #loading-message {
-    display: none;
+    display: none; /* Initially hidden */
     position: fixed;
     bottom: 10px;
     right: 10px;
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
     padding: 10px;
-    z-index: 1000;
+    z-index: 1000; /* Ensure it's above other content */
 }
 
 .time-container {
@@ -352,21 +364,14 @@ h2 {
     margin-bottom: 2px;
 }
 
-/* Style for the boxes */
 .section-box {
-  width: 25%; /* Adjust width to fit two boxes in a row */
-  background-color: #ffffff;
-  height: 40px; /* Set a fixed height */
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  font-size: 12px; /* Control font size for content inside the boxes */
-  display: flex;
-  align-items: center;
-  justify-content: top;
-  text-decoration: underline; /* Add underline to the text */
+    width: 30%;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
 }
 
 .section-title {
